@@ -4,13 +4,27 @@
 
 ## 一、本机基础环境检查
 
-- [ ] 确认 Mac 使用 Apple Silicon `arm64`
-- [ ] 确认 macOS 版本
-- [ ] 确认 Xcode 和 Command Line Tools 可用
-- [ ] 确认 Apple Clang 版本
-- [ ] 确认 CMake 版本
-- [ ] 确认 Homebrew 可用
-- [ ] 确认系统中没有会干扰构建的其他 Qt 路径
+- [x] 确认 Mac 使用 Apple Silicon `arm64`
+  - 检查命令：`uname -m`
+  - 检查结果：`arm64`
+- [x] 确认 macOS 版本
+  - 检查结果：macOS 26.6.2，Build 25G83
+- [x] 确认 Xcode 和 Command Line Tools 可用
+  - Developer 目录：`/Applications/Xcode.app/Contents/Developer`
+  - Xcode 版本：26.2，Build 17C52
+- [x] 确认 Apple Clang 版本
+  - 检查结果：Apple Clang 17.0.0，目标架构 `arm64-apple-darwin25.6.0`
+- [x] 确认 CMake 版本
+  - 检查结果：CMake 3.22.1
+  - 安装路径：`/opt/homebrew/bin/cmake`
+- [x] 确认 Homebrew 可用
+  - 检查结果：Homebrew 6.0.16
+  - 安装路径：`/opt/homebrew/bin/brew`
+  - 安装前缀：`/opt/homebrew`
+- [x] 确认系统中没有会干扰构建的其他 Qt 路径
+  - `qmake`、`qtpaths`、`qtpaths5` 和 `qtpaths6` 均未找到。
+  - Homebrew 未安装 Qt 包，`/opt/homebrew/opt` 下未发现 Qt 目录。
+  - `/Applications` 下未发现 Qt Creator，环境变量中未设置 Qt 路径。
 
 ## 二、安装 Qt 5.15.19
 
