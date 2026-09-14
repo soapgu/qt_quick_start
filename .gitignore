@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+._*
+
+# Qt Creator 用户配置
+*.pro.user*
+*.qbs.user*
+CMakeLists.txt.user*
+.qtcreator/
+
+# 构建目录与产物
+build/
+build-*/
+Makefile
+Makefile.*
+.qmake.stash
+*.o
+*.obj
+*.app/
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
