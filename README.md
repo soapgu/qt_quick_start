@@ -90,37 +90,69 @@
 
 ## 四、创建最简 Hello World 项目
 
-- [ ] 创建 `qt_quick_start.pro`
-- [ ] 创建 `main.cpp`
-- [ ] 将 C++ 标准固定为 C++11
-- [ ] 使用 `QApplication` 创建应用程序
-- [ ] 使用 `QWidget` 创建主窗口
-- [ ] 使用 `QLabel` 显示 `Hello World`
-- [ ] 使用 `QVBoxLayout` 居中放置文本
-- [ ] 将窗口标题设置为 `Qt Quick Start`
-- [ ] 添加最低 Qt 5.12 编译期检查
-- [ ] 添加禁止使用 Qt 6 的编译期检查
-- [ ] 确认没有使用 Qt 5.13 及以上版本新增的 API
-- [ ] 确认没有使用 macOS 或麒麟专属 API
-- [ ] 确认没有引入第三方依赖
-- [ ] 确认没有使用 `.ui`、QML 或 Qt WebEngine
+- [x] 创建 `qt_quick_start.pro`
+  - 使用 qmake，项目类型为 Qt Widgets 应用，目标名称为 `qt_quick_start`。
+- [x] 创建 `main.cpp`
+  - 项目仅包含该 C++ 源文件。
+- [x] 将 C++ 标准固定为 C++11
+  - qmake 配置：`CONFIG += c++11`。
+- [x] 使用 `QApplication` 创建应用程序
+- [x] 使用 `QWidget` 创建主窗口
+  - 最小窗口尺寸为 320 × 180。
+- [x] 使用 `QLabel` 显示 `Hello World`
+- [x] 使用 `QVBoxLayout` 居中放置文本
+  - 标签自身及其在布局中的对齐方式均设置为 `Qt::AlignCenter`。
+- [x] 将窗口标题设置为 `Qt Quick Start`
+- [x] 添加最低 Qt 5.12 编译期检查
+  - `QT_VERSION` 低于 `QT_VERSION_CHECK(5, 12, 0)` 时触发编译错误。
+- [x] 添加禁止使用 Qt 6 的编译期检查
+  - `QT_VERSION` 大于或等于 `QT_VERSION_CHECK(6, 0, 0)` 时触发编译错误。
+- [x] 确认没有使用 Qt 5.13 及以上版本新增的 API
+  - 所用类和方法均为 Qt 5.12 已有的 Qt Core、Gui 和 Widgets API。
+- [x] 确认没有使用 macOS 或麒麟专属 API
+  - 源码仅使用标准 C++ 入口和跨平台 Qt API。
+- [x] 确认没有引入第三方依赖
+  - 项目只依赖 Qt Widgets 及其 Qt Core、Qt Gui 传递依赖。
+- [x] 确认没有使用 `.ui`、QML 或 Qt WebEngine
+  - 界面完全由 `main.cpp` 中的 Qt Widgets 代码创建。
+
+> 编译检查：使用 Qt 5.15.19 的 `/opt/homebrew/opt/qt@5/bin/qmake` 生成 Makefile，并使用 Apple Clang 在独立的 `build-stage4` 目录完成编译。图形界面运行及 Qt Creator 验证留到第五部分。
 
 ## 五、Mac 编译与运行验证
 
-- [ ] 创建独立的 Mac 构建目录
-- [ ] 使用 Qt 5.15 qmake 生成 Makefile
-- [ ] 使用 Apple Clang 完成编译
-- [ ] 确认编译过程无错误
-- [ ] 从命令行启动程序
-- [ ] 确认窗口正常显示
-- [ ] 确认窗口标题为 `Qt Quick Start`
-- [ ] 确认窗口中央显示 `Hello World`
-- [ ] 确认程序能够正常退出
-- [ ] 使用 Qt Creator 指定 Kit 重新构建
-- [ ] 使用 Qt Creator 启动和调试程序
-- [ ] 确认 Mac 可执行文件为 `arm64`
-- [ ] 确认可执行文件链接 Qt 5.15 库
-- [ ] 将 Mac 验证结果记录到 README
+- [x] 创建独立的 Mac 构建目录
+  - 命令行构建目录：`build-mac`，已由 `.gitignore` 的 `build-*/` 规则忽略。
+- [x] 使用 Qt 5.15 qmake 生成 Makefile
+  - qmake：`/opt/homebrew/opt/qt@5/bin/qmake`
+  - Qt 版本：5.15.19，Makefile 生成成功。
+- [x] 使用 Apple Clang 完成编译
+  - Apple Clang 版本：17.0.0。
+  - 编译参数包含 `-std=gnu++11` 和 `-arch arm64`。
+- [x] 确认编译过程无错误
+  - `main.cpp` 编译和应用链接均成功。
+  - qmake 提示 macOS 26.2 SDK 超出 Qt 5.15 官方测试范围，与第二部分记录的已知环境警告一致。
+- [x] 从命令行启动程序
+  - 使用 `open -n build-mac/qt_quick_start.app` 启动成功。
+- [x] 确认窗口正常显示
+  - 命令行启动后检测到标准应用窗口，用户也已通过 Qt Creator 实际运行确认。
+- [x] 确认窗口标题为 `Qt Quick Start`
+  - macOS 辅助功能树和用户提供的运行截图均确认标题正确。
+- [x] 确认窗口中央显示 `Hello World`
+  - macOS 辅助功能树和用户提供的运行截图均确认文本正确且位于窗口中央。
+- [x] 确认程序能够正常退出
+  - 点击窗口关闭按钮后，命令行启动的应用进程正常结束。
+- [x] 使用 Qt Creator 指定 Kit 重新构建
+  - Kit：`Desktop Qt 5.15 Apple Silicon`，构建配置：Debug。
+  - 构建目录：`build/Desktop_Qt_5_15_Apple_Silicon_Debug`，可执行文件生成成功。
+- [x] 使用 Qt Creator 启动和调试程序
+  - 普通启动已由用户实际验证。
+  - 使用 `LLDB for "qt_quick_start"` 启动调试成功，程序窗口正常显示；停止后 Qt Creator 显示“调试器已结束”。
+- [x] 确认 Mac 可执行文件为 `arm64`
+  - 命令行和 Qt Creator 构建的可执行文件均为 `Mach-O 64-bit executable arm64`。
+- [x] 确认可执行文件链接 Qt 5.15 库
+  - `otool -L` 确认链接 QtWidgets、QtGui 和 QtCore 5.15.19。
+- [x] 将 Mac 验证结果记录到 README
+  - 已记录构建工具、构建目录、运行界面、调试器、架构和动态库检查结果。
 
 ## 六、银河麒麟编译与运行验证
 
