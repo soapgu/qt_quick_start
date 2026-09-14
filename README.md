@@ -55,18 +55,38 @@
 
 ## 三、安装 Qt Creator 20.0.1
 
-- [ ] 下载官方 macOS Universal 安装包
-- [ ] 校验下载文件完整性
-- [ ] 将 Qt Creator 安装到 `/Applications`
-- [ ] 确认 Qt Creator 版本为 20.0.1
-- [ ] 确认 Qt Creator 原生支持 Apple Silicon
-- [ ] 在 `Preferences → Kits → Qt Versions` 注册 Qt 5.15
-- [ ] 创建 `Desktop Qt 5.15 Apple Silicon` Kit
-- [ ] 配置 Apple Clang C 编译器
-- [ ] 配置 Apple Clang C++ 编译器
-- [ ] 配置 LLDB 调试器
-- [ ] 配置 Qt 5.15 qmake
-- [ ] 确认 Kit 中没有 ABI 或工具链错误
+- [x] 下载官方 macOS Universal 安装包
+  - 文件：`qt-creator-opensource-mac-universal-20.0.1.dmg`
+  - 来源：Qt 官方 `official_releases/qtcreator/20.0/20.0.1` 目录。
+- [x] 校验下载文件完整性
+  - 官方 MD5：`08fb867539252b60c4d16f7174fc9872`
+  - 本地 MD5：`08fb867539252b60c4d16f7174fc9872`
+  - 校验结果：一致。
+- [x] 将 Qt Creator 安装到 `/Applications`
+  - 安装路径：`/Applications/Qt Creator.app`
+- [x] 确认 Qt Creator 版本为 20.0.1
+  - `CFBundleShortVersionString` 和 `CFBundleVersion` 均为 20.0.1。
+  - 已通过图形界面成功启动并完成重启验证。
+- [x] 确认 Qt Creator 原生支持 Apple Silicon
+  - 主程序为 Universal Mach-O，同时包含 `x86_64` 和 `arm64`。
+- [x] 在 `Preferences → Kits → Qt Versions` 注册 Qt 5.15
+  - 注册结果：`Qt 5.15.19 (/opt/homebrew/opt/qt@5)`。
+  - qmake：`/opt/homebrew/opt/qt@5/bin/qmake`
+- [x] 创建 `Desktop Qt 5.15 Apple Silicon` Kit
+  - Build device 和 Run device 均为本地桌面设备。
+- [x] 配置 Apple Clang C 编译器
+  - 路径：`/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang`
+  - 目标 ABI：Darwin arm64。
+- [x] 配置 Apple Clang C++ 编译器
+  - 路径：`/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++`
+  - 目标 ABI：Darwin arm64。
+- [x] 配置 LLDB 调试器
+  - 配置结果：`System LLDB at /usr/bin/lldb`，支持 arm64 Darwin ABI。
+- [x] 配置 Qt 5.15 qmake
+  - Kit 使用 Qt 5.15.19，qmake 路径为 `/opt/homebrew/opt/qt@5/bin/qmake`。
+- [x] 确认 Kit 中没有 ABI 或工具链错误
+  - Qt Creator Kit 页面未显示 ABI 或工具链错误。
+  - Qt Creator 将 Xcode 自动检测的 arm64 工具链显示为 `Apple Clang iOS (arm64)`；其编译器路径和 Darwin arm64 ABI 正确，qmake 项目的 macOS 平台由 Qt 5.15 的 `macx-clang` mkspec 决定。
 
 ## 四、创建最简 Hello World 项目
 
