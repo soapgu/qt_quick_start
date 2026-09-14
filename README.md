@@ -28,14 +28,28 @@
 
 ## 二、安装 Qt 5.15.19
 
-- [ ] 使用 Homebrew 安装 `qt@5`
-- [ ] 确认 `qmake` 实际路径
-- [ ] 确认 Qt 版本为 5.15.19
-- [ ] 确认 `qmake` 和 Qt 库包含 `arm64` 架构
-- [ ] 确认 Qt Widgets 模块可用
-- [ ] 如果 Homebrew 方案失败，记录失败原因
-- [ ] 必要时从源码编译 Qt 5.15.19 ARM64
-- [ ] 记录最终采用的 Qt 安装方式和路径
+- [x] 使用 Homebrew 安装 `qt@5`
+  - 安装结果：通过 Homebrew ARM64 bottle 安装成功，共 10,541 个文件、约 192 MB。
+- [x] 确认 `qmake` 实际路径
+  - 路径：`/opt/homebrew/opt/qt@5/bin/qmake`
+  - qmake 版本：3.1
+- [x] 确认 Qt 版本为 5.15.19
+  - 检查结果：`Using Qt version 5.15.19 in /opt/homebrew/Cellar/qt@5/5.15.19/lib`
+- [x] 确认 `qmake` 和 Qt 库包含 `arm64` 架构
+  - `qmake`、QtCore 和 QtWidgets 均为 Mach-O 64-bit arm64。
+- [x] 确认 Qt Widgets 模块可用
+  - 临时 C++11 Widgets 项目已使用 qmake 和 Apple Clang 成功编译、链接。
+  - 临时可执行文件为 arm64，并链接 QtWidgets、QtGui 和 QtCore 5.15.19。
+- [x] 如果 Homebrew 方案失败，记录失败原因
+  - 不适用：Homebrew 安装成功，无需记录失败原因。
+- [x] 必要时从源码编译 Qt 5.15.19 ARM64
+  - 不适用：Homebrew 已提供可用的 Qt 5.15.19 ARM64 bottle，无需源码编译。
+- [x] 记录最终采用的 Qt 安装方式和路径
+  - 安装方式：Homebrew `qt@5` 5.15.19。
+  - 稳定引用路径：`/opt/homebrew/opt/qt@5`
+  - 实际版本路径：`/opt/homebrew/Cellar/qt@5/5.15.19`
+
+> 兼容性说明：qmake 提示 Qt 5.15 仅测试到 macOS 14 SDK，当前使用 macOS 26.2 SDK，属于 Qt 上游未测试配置。本次最小 Widgets 项目编译和链接成功，实际界面运行将在第五部分继续验证。
 
 本项目不使用 Qt WebEngine。
 
